@@ -19,6 +19,7 @@ public class Flight {
 
     public Flight(int numOfSeats, String destination, String departureAirPort,
                   double price, boolean availability, LocalDateTime arrivalDateTime, LocalDateTime departureDateTime, int numOfTickets) {
+        this.id = ++counter;
         this.numOfSeats = numOfSeats;
         this.destination = destination;
         this.departureAirPort = departureAirPort;

@@ -103,7 +103,7 @@ public class UserInterface {
                     break;
                 case 2:
                     System.out.println("Booking a flight...");
-//                    Services.bookFlight(user);
+                    Services.bookFlight(user);
                     break;
                 case 3:
                     System.out.println("Cancelling a flight...");
@@ -141,8 +141,8 @@ public class UserInterface {
                     Services.showAllFlights();
                     break;
                 case 2:
-                    System.out.println("Booking a flight...");
-                    // Add logic to book a flight
+                    System.out.println("Booking a flight");
+                    Services.bookFlight(user);
                     break;
                 case 3:
                     System.out.println("Cancelling a flight...");

@@ -9,13 +9,10 @@ public class Services {
 
         static ArrayList<User> existingUsers = Database.readUsersFromFile("C:\\Users\\Ghaith\\IdeaProjects\\lLibraryFirst\\src\\passengers.txt");
         static ArrayList<Flight> existingFlights = Database.readFlightsFromFile("C:\\Users\\Ghaith\\IdeaProjects\\lLibraryFirst\\src\\flights.txt");
+        static Scanner scanner = new Scanner(System.in);
 
 //                      Made Only For Admins! so they can delete/add a flight
 public static void addFlight() {
-        Scanner scanner = new Scanner(System.in);
-
-        ArrayList<Flight> flights = Database.readFlightsFromFile("C:\\Users\\Ghaith\\IdeaProjects\\lLibraryFirst\\src\\flights.txt");
-
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         System.out.print("Enter Number of Seats: ");
@@ -47,29 +44,28 @@ public static void addFlight() {
                 System.out.println("Enter Number Of Available Tickets: ");
                 int tickets = scanner.nextInt();
 
-                flights.add(new Flight(seats, destination, departure, price, availability, arrivalDateTime, departureDateTime,tickets));
+
+                existingFlights.add(new Flight(seats, destination, departure, price, availability, arrivalDateTime, departureDateTime, tickets));
 
 
-
-                Database.writeFlightsToFile("C:\\Users\\Ghaith\\IdeaProjects\\lLibraryFirst\\src\\flights.txt",flights);
+                Database.writeFlightsToFile("C:\\Users\\Ghaith\\IdeaProjects\\lLibraryFirst\\src\\flights.txt", existingFlights);
                 System.out.println("Flight added successfully!");
 
         } catch (DateTimeParseException e) {
                 System.out.println("Invalid date format. Please use 'YYYY-MM-DD HH:mm'.");
         }
 }
-
         public static void removeFlight() {
-                Scanner scanner = new Scanner(System.in);
-                ArrayList<Flight> flights = Database.readFlightsFromFile("C:\\Users\\Ghaith\\IdeaProjects\\lLibraryFirst\\src\\flights.txt");
+
 
                 System.out.print("Enter Flight ID to remove: ");
                 int id = scanner.nextInt();
 
-                boolean removed = flights.removeIf(flight -> flight.getId() == id);
+                boolean removed = existingFlights.removeIf(flight -> flight.getId() == id);
 
                 if (removed) {
-                        Database.writeFlightsToFile("C:\\Users\\Ghaith\\IdeaProjects\\lLibraryFirst\\src\\flights.txt",flights);
+
+                        Database.writeFlightsToFile("C:\\Users\\Ghaith\\IdeaProjects\\lLibraryFirst\\src\\flights.txt", existingFlights);
                         System.out.println("Flight removed successfully!");
                 } else {
                         System.out.println("No flight found with ID: " + id);
@@ -80,7 +76,6 @@ public static void addFlight() {
 
         public static void bookFlight(User passenger){
                 int choose;
-                Scanner scanner = new Scanner(System.in);
         Ticket ticket = new Ticket(passenger);
         do {
                 System.out.println("Which flight do you want to book?");
@@ -111,7 +106,6 @@ public static void addFlight() {
 //                      Login for users
         public static User login(){
                 User user = new User(false);
-                Scanner input = new Scanner(System.in);
                 ArrayList<User> users = Database.readUsersFromFile("C:\\Users\\Ghaith\\IdeaProjects\\lLibraryFirst\\src\\passengers.txt");
                 if (users.isEmpty())
                 {
@@ -120,9 +114,9 @@ public static void addFlight() {
                 }
                 while(true) {
                         System.out.println("Please enter your name:");
-                        user.name = input.nextLine();
+                        user.name = scanner.nextLine();
                         System.out.println("Please enter your password: ");
-                        user.password = input.nextLine();
+                        user.password = scanner.nextLine();
                                 for (User u : users) {
                                         if (user.name.equals(u.getName()) && user.password.equals(u.getPassword())) {
                                                 System.out.println("Login was successful");
@@ -137,7 +131,6 @@ public static void addFlight() {
 //                      SignIn for users
         public static void signIn(Scanner input) {
 
-//                ArrayList<User> existingUsers = Database.readUsersFromFile("C:\\Users\\Ghaith\\IdeaProjects\\lLibraryFirst\\src\\passengers.txt");
 
                 User newUser = new User(true);
 
@@ -169,10 +162,9 @@ public static void addFlight() {
 
 
 
-//                      show all flights
+//                      Display all flights in a schedule
         public static void showAllFlights(){
 
-//                ArrayList<Flight> existingFlights = Database.readFlightsFromFile("C:\\Users\\Ghaith\\IdeaProjects\\lLibraryFirst\\src\\flights.txt");
 
                 System.out.println("+============+========+=================+=================+==========+============+======================+======================+=========+");
                 System.out.printf("| %-10s | %-6s | %-15s | %-15s | %-8s | %-10s | %-20s | %-20s | %-7s |\n",

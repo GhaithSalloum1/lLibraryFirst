@@ -8,6 +8,7 @@ public class Database {
 
     static ArrayList<User> users = new ArrayList<>();
     static ArrayList<Flight> flights = new ArrayList<>();
+    static ArrayList<Ticket> tickets = new ArrayList<>();
 
 
 
@@ -54,7 +55,6 @@ public class Database {
 
 
     public static ArrayList<Flight> readFlightsFromFile(String fileName){
-//        ArrayList<Flight> flights = new ArrayList<>();
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
@@ -79,7 +79,6 @@ public class Database {
 
             for (Flight flight : flights) {
 
-                // Format the date and time explicitly to avoid the "T"
                 String arrivalDateTime = flight.getArrivalDateTime().format(formatter);
                 String departureDateTime = flight.getDepartureDateTime().format(formatter);
 
@@ -132,7 +131,6 @@ public class Database {
 
 
     public static ArrayList<User> readUsersFromFile(String fileName){
-//        ArrayList<User> users = new ArrayList<>();
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
@@ -192,11 +190,19 @@ public class Database {
     }
 
 
+    public static void writeReservationsToFile(String fileName, ArrayList<Ticket> reservations){
+
+
+
+
+
+
+    }
+
 
 
     public static ArrayList<Ticket> readReservationsFromFile(String fileName){
 
-        ArrayList<Ticket> tickets = new ArrayList<>();
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
